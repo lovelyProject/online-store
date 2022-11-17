@@ -10,33 +10,35 @@ const  filterShow = document.querySelector('.filter-arrow');
 const filterBox = document.querySelector('.filters-box');
 const filterClose = document.querySelector('.close-filter');
 const filter = document.querySelector('.filter-button');
+const cartItems = cart.querySelector('.cart-items').children;
 
-
-
+//Минус у счетчика в карточке на странице
 function makeMinusCounter(){
     let number = this.nextElementSibling;
     let productBox = this.closest('.product-box');
     let price = productBox.querySelector('.price');
-    
-        
+           
         if(number.textContent > 1){
             number.textContent--;
-            price.textContent -= +box.price;
+        
+            
         }else{
             number.textContent = 1;
         }
 
-    
 }
-
+//Плюс у счетчика в карточке на странице
 function makePlusCounter(){ 
     let productBox = this.closest('.product-box');
     let price = productBox.querySelector('.price');
     
     this.previousElementSibling.textContent++;
-    price.textContent = Number(price.textContent) + box.price;
+    
 }
 
+//Поиск элемента в корзине при добавлении в корзину
+
+//добавить товар в корзину
 function addToCart(){
     let cartItem = this.closest('.product-box').cloneNode(true);
     let cartBox = cart.querySelector('.cart-items');
@@ -45,20 +47,32 @@ function addToCart(){
     let counterNumber = cartItem.querySelector('.counter-number');
     counterNumber.previousElementSibling.addEventListener('click',makeMinusCounter);
     counterNumber.nextElementSibling.addEventListener('click',makePlusCounter);
-
-
-    totalCost.textContent = (totalCost.textContent == '0')? price.textContent * counterNumber.textContent : +totalCost.textContent + +price.textContent * counterNumber.textContent;
-
+    //Удаление кнопки добавить в корзину у клона
     cartItem.removeChild(cartItem.querySelector('button'));
-
-    cartBox.appendChild(cartItem);
+    //Проверка есть ли предмет в корзине или нет
+    findItemInCart(cartItems,totalCost,price,counterNumber,cartBox,cartItem);
+    
 }
 
+function findItemInCart(arr,totalCost,price,counterNumber,cartBox,cartItem){
+    let itemsArr = [...arr];
+    let good = itemsArr.find(elem=> elem.id == cartItem.id);
 
+    if (good){
+        totalCost.textContent = Number(totalCost.textContent) + Number(price.textContent) * counterNumber.textContent;
+        good.querySelector('.counter-number').textContent = Number(good.querySelector('.counter-number').textContent) + Number(counterNumber.textContent);
+        good.querySelector('.price').textContent = Number(good.querySelector('.price').textContent) + Number(price.textContent) * counterNumber.textContent;
+    }else{
+        totalCost.textContent = (totalCost.textContent == '0')? price.textContent * counterNumber.textContent : +totalCost.textContent + +price.textContent * counterNumber.textContent;
+        price.textContent = Number(price.textContent) * counterNumber.textContent;
+        cartBox.appendChild(cartItem);
+    }
+}
+//Открытие корзины при клике
 cartIco.addEventListener('click',()=>{
     cart.classList.toggle('cart-ico_active');
 })
-
+//Закрытие корзины при клике
 closeCart.addEventListener('click',()=>{
     cart.classList.remove('cart-ico_active');
 })
@@ -74,7 +88,7 @@ class Product{
         this.brandId = brandId;
     }
 }
-
+//Получение данных и рендер карточек
 async function getData(link){
     const data = await fetch(link);
     const result = await data.json();
@@ -82,9 +96,9 @@ async function getData(link){
     renderProducts(result);
 }
 
-getData(url);
+getData(url); //Загружаем карточки с товарами 
 
-
+//рендер карточек
 const renderProducts = function(list){
     for (let i = 20; i < list.length; i++){
        let  {id,category_id:categoryId,title,description,photo,price,brand_id:brandId} = list[i];
@@ -109,15 +123,16 @@ const renderProducts = function(list){
     }
 }
 
-
+//Открытие фильтров
 filterShow.addEventListener('click',()=>{
     filterBox.classList.add('filters-box_active');
 })
-
+//Закрытие фильтров
 filterClose.addEventListener('click',()=>{
     filterBox.classList.remove('filters-box_active');
 })
 
+//функционал фильтров
 filter.addEventListener('click', function(){
    let inputs = filterBox.querySelectorAll('input');
    let inputsArray = [...inputs];
@@ -136,7 +151,7 @@ filter.addEventListener('click', function(){
 
 
 })
-
+//Спрятать элементы
 function hideElements(arr){
     let list = [...arr]
 
