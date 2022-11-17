@@ -16,7 +16,13 @@ span,h1,h2,h3,h4,h5,h6{
 img{
     width: 100%;
 }
-
+.delete-btn-svg{
+    cursor: pointer;
+    width: 2.5rem;
+}
+.delete-btn-svg:hover{
+    opacity: 0.7;
+}
 .cart-ico{
     width: 20px;
     cursor: pointer;
@@ -82,11 +88,16 @@ header{
     grid-template-columns: repeat(auto-fit, minmax(220px, auto));
     gap: 1.5rem;
 }
+.shop-content .product-img{
+    height: 250px;
+}
 
 .product-box{
     position: relative;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
     text-align: center;
+    border-radius: 0.6rem;
+    padding-top: 1rem;
 }   
 .product-box:hover img{
     padding: 10px;
@@ -109,6 +120,7 @@ header{
     font-weight: 600;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
+    min-height: 5.25rem;
 }
 .price{
     
@@ -142,6 +154,7 @@ header{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, auto));
     gap: 0.3rem;
+    margin-top: 1.2rem;
 }
 .cart-ico_active{
     right: 0;
@@ -282,4 +295,5 @@ header{
 .total-cost-block{
     margin-top: 1.2rem;
     text-align: center;
+    font-size: 1.45rem;
 }
