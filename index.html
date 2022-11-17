@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevHouse-shop</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="nav-container">
+        <a href="#" class="logo">DevHouse-shop</a>
+        <svg
+          class="cart-ico"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 64 64"
+        >
+          <defs>
+            <style>
+              .cls-1 {
+                fill: #37474f;
+              }
+              .cls-2 {
+                fill: #78909c;
+              }
+              .cls-3 {
+                fill: #ba1d08;
+              }
+              .cls-4 {
+                fill: #ff2400;
+              }
+            </style>
+          </defs>
+          <title>Shopping Basket</title>
+          <g id="Layer_2" data-name="Layer 2">
+            <g id="Layer_1-2" data-name="Layer 1">
+              <path
+                class="cls-1"
+                d="M44,34a4,4,0,0,1-3.63-2.33l-12-26a4,4,0,1,1,7.26-3.35l12,26A4,4,0,0,1,44,34Z"
+              />
+              <path
+                class="cls-2"
+                d="M20,34a4,4,0,0,1-3.63-5.68l12-26a4,4,0,1,1,7.26,3.35l-12,26A4,4,0,0,1,20,34Z"
+              />
+              <rect class="cls-3" y="26" width="64" height="8" rx="4" ry="4" />
+              <path
+                class="cls-4"
+                d="M4,34,7.54,60.53a4,4,0,0,0,4,3.47h41a4,4,0,0,0,4-3.47L60,34ZM16.11,59H16a1,1,0,0,1-1-.89l-2-18a1,1,0,1,1,2-.22l2,18A1,1,0,0,1,16.11,59Zm8,0H24a1,1,0,0,1-1-.89l-2-18a1,1,0,1,1,2-.22l2,18A1,1,0,0,1,24.11,59ZM33,58a1,1,0,1,1-2,0V40a1,1,0,0,1,2,0Zm8,.11A1,1,0,0,1,40,59h-.11a1,1,0,0,1-.88-1.1l2-18a1,1,0,1,1,2,.22Zm8,0A1,1,0,0,1,48,59h-.11a1,1,0,0,1-.88-1.1l2-18a1,1,0,1,1,2,.22Z"
+              />
+            </g>
+          </g>
+        </svg>
+        <div class="cart">
+          <h2 class="cart-title">YOUR CART</h2>
+          <svg
+            class="cart-arrow"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M9 13.887l5-5V8.18l-5-5-.707.707 4.146 4.147H2v1h10.44L8.292 13.18l.707.707z"
+            />
+          </svg>
+          
+          <div class="cart-items">
+            
+          </div>
+          <div class="total-cost-block">Итоговая стоимость <span class="total-cost" id="total-cost">0</span> ₽</div>
+          <button class="make-order">Make order</button>
+          
+        </div>
+      </nav>
+    </header>
+    <section class="shop container">
+        <svg class="filter-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
+            <g>
+              <path d="m40.4,121.3c-0.8,0.8-1.8,1.2-2.9,1.2s-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8,0l53.9,53.9c1.6,1.6 1.6,4.2 0,5.8l-53.9,53.9z"/>
+            </g>
+          </svg>
+      <div class="filters-box">
+        <svg
+            class="close-filter"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M9 13.887l5-5V8.18l-5-5-.707.707 4.146 4.147H2v1h10.44L8.292 13.18l.707.707z"
+            />
+          </svg>
+          
+        <h2 class="filter-title">Фильтры</h2>
+        <div class="filter-item">
+            
+          <input type="checkbox" name="first" id="first" data-category="1"  checked/>
+          <label for="first">Iphone</label>
+        </div>
+        <div class="filter-item">
+          <input type="checkbox" name="second" id="second" data-category="2" checked />
+          <label for="second">Honor</label>
+        </div>
+        <div class="filter-item">
+          <input type="checkbox" name="third" id="third" data-category="3" checked/>
+          <label for="third">Xiaomi</label>
+        </div>
+        <div class="filter-item">
+          <input type="checkbox" name="fourth" id="fourth" data-category="4" checked/>
+          <label for="fourth">Samsung</label>
+        </div>
+        <button class="filter-button">Фильтровать</button>
+      </div>
+      <h2 class="section-title">Shop products</h2>
+
+      <div class="shop-content">
+        <div class="product-box" id="structure">
+          <img src="" alt="" class="product-img" />
+          <h2 class="product-title"></h2>
+
+          <div class="counter-block">
+            <div class="counter_minus">-</div>
+            <div class="counter-number">1</div>
+            <div class="counter_plus">+</div>
+          </div>
+          <div class="price-block"><span class="price"></span>₽</div>
+          <button class="add-to-cart">Добавить в корзину</button>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
