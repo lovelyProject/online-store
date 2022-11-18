@@ -92,11 +92,14 @@ function addToCart(){
     cartItem.removeChild(cartItem.querySelector('button'));
     
     const btn = document.createElement('span');
+    const priceblock = cartItem.querySelector('.price-block');
+    
     btn.className = 'delete-btn';
-    btn.innerHTML = deleteItemSvg;
+    priceblock.innerHTML += deleteItemSvg;
+    
 
-    btn.addEventListener('click', deleteItemFromCart);
-
+    priceblock.querySelector('svg').addEventListener('click', deleteItemFromCart);
+    
     cartItem.appendChild(btn);
     //Проверка есть ли предмет в корзине или нет
     findItemInCart(cartItems.children,totalCost,price,counterNumber,cartBox,cartItem);
@@ -220,6 +223,8 @@ filter.addEventListener('click', function(){
 
 
 })
+
+
 //Спрятать элементы
 function hideElements(arr){
     let list = [...arr]
@@ -228,14 +233,48 @@ function hideElements(arr){
         element.classList.add('hide');
     });
 }
+
+
 //Делаем заказ и очищаем корзину
 makeOrder.addEventListener('click',function(){
     if (cartItems.children.length > 0) {
         alert("We are making you order, thank you for choosing our store");
+        
         [...cartItems.children].forEach(elem => cartItems.removeChild(elem));
+       
         totalPrice.textContent = 0;
+        localStorage.clear();
     } else{
         alert('Sorry, but you didn\'t take anything')
     }
     
+})
+
+function addToLocal(){
+    let htmlItems = [cartItems.innerHTML];
+    //Сохраняем код html элементов
+    localStorage.setItem('items', htmlItems);
+    // сохраняем общую цену
+    localStorage.setItem('totalPrice', totalPrice.textContent)
+}
+//При закрытии страницы добавляем все предметы в локалку
+window.addEventListener('unload', addToLocal);
+
+
+//При загрузки страницы вытаскиваем все предметы из локалки
+document.addEventListener('DOMContentLoaded', function(){
+    
+    if (localStorage.length > 0){
+        cartItems.innerHTML = localStorage.getItem('items');
+        totalPrice.textContent = localStorage.getItem('totalPrice');
+
+        localStorage.clear();
+
+        let deleteBtns = [...cartItems.querySelectorAll('svg')];
+        let counters = [...cartItems.querySelectorAll('.counter-number')];
+        //Навешиваем события на элементы в корзине
+        counters.forEach(elem => elem.previousElementSibling.addEventListener('click',makeMinusForCartCounter));
+        counters.forEach(elem => elem.nextElementSibling.addEventListener('click',makePlusForCartCounter));
+        deleteBtns.forEach(elem => elem.addEventListener('click', deleteItemFromCart));       
+    }
 })
